@@ -1,0 +1,9 @@
+*
+!data/
+!data/*.png
+!.gitignore
+!README.md
+!*.cpp
+!*.hpp
+!*.pro
+!*.qrc
