@@ -1,5 +1,7 @@
 # QImageGrid
 
+Requires C++14, tested with Qt5
+
 Create a grid of images with an optional image spacing
 
 ```c++
@@ -25,7 +27,7 @@ grid.addImage(0, 0, img);
 grid.addImage(qMakePair(0, 0), img);
 
 // Generate image
-QImage out = grid.generateImage();
+const QImage out = grid.generateImage();
 
 // Save to filename
 grid.save("out.png");
@@ -38,7 +40,7 @@ grid.save(&buffer);
 grid.remove(0, 0);
 
 // Or...
-grid.remove(qMakePair(1, 0));
+grid.remove(qMakePair(0, 0));
 
 // Or remove all at once...
 grid.clear();
@@ -60,3 +62,7 @@ const int rows = grid.getRowCount();
 // Get column count for row 0 (=3)
 const int columns = grid.getColumnCount(0);
 ```
+
+# Example
+
+<img src="http://i.imgur.com/ZQu9uyn.png">
