@@ -51,6 +51,9 @@ class QImageGrid
     //! Output image format
     QImage::Format format_;
 
+    //! Resize to width
+    int width_;
+
     /**
      * @brief Calculate output image size
      * @post Modifies sizes_ with correct images sizes for each row
@@ -59,9 +62,9 @@ class QImageGrid
     QSize calculateSize() const;
 
 public:
-    QImageGrid(QImage::Format format = QImage::Format_RGB32);
-    QImageGrid(const QImageGrid &other) = default;
-    QImageGrid(QImageGrid &&other) = default;
+    explicit QImageGrid(QImage::Format format = QImage::Format_RGB32);
+    explicit QImageGrid(const QImageGrid &other) = default;
+    explicit QImageGrid(QImageGrid &&other) = default;
     QImageGrid &operator=(const QImageGrid &other) = default;
     QImageGrid &operator=(QImageGrid &&other) = default;
     ~QImageGrid() = default;
@@ -111,6 +114,15 @@ public:
      * @param color Color between images
      */
     void setSpacingColor(const QColor &color);
+
+    /**
+     * @brief Set generated image width
+     *
+     * A value of 0 will use normal image widths for
+     * row with fewest columns
+     * @param width New width
+     */
+    void setWidth(int width);
 
     /**
      * @brief Clear all images

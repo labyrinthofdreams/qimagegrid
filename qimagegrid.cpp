@@ -36,13 +36,13 @@ namespace {
 
 template <class T>
 T calculateHeight(const QImage &img, const T newWidth) {
-    return 1.0 * img.height() / img.width() * newWidth;
+    return static_cast<double>(img.height()) / img.width() * newWidth;
 }
 
 } // namespace
 
 QImageGrid::QImageGrid(const QImage::Format format)
-    : grid_(), sizes_(), spacing_(0), color_(Qt::black), format_(format)
+    : grid_(), sizes_(), spacing_(0), color_(Qt::black), format_(format), width_(0)
 {
 
 }
@@ -79,7 +79,12 @@ void QImageGrid::setSpacing(const int spacing)
 
 void QImageGrid::setSpacingColor(const QColor &color)
 {
-   color_ = color;
+    color_ = color;
+}
+
+void QImageGrid::setWidth(const int width)
+{
+    width_ = width;
 }
 
 void QImageGrid::clear()
@@ -130,9 +135,9 @@ QSize QImageGrid::calculateSize() const
 
    // 3. Minimum width will be used to calculate the new sizes
    // for each row where the column size differs
-   const auto minWidthWithoutSpacing = smallest * grid_.first().width();
    const auto spacingWidth = (smallest - 1) * spacing_;
-   const auto minWidth = minWidthWithoutSpacing + spacingWidth;
+   const auto minWidthWithoutSpacing = smallest * grid_.first().width();
+   const auto minWidth = width_ > 0 ? width_ : (minWidthWithoutSpacing + spacingWidth);
 
    // 4. Calculate the image widths for each row
    for(auto it = counts.cbegin(); it != counts.cend(); ++it) {
