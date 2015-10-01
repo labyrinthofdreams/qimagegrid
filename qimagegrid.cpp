@@ -145,7 +145,7 @@ QSize QImageGrid::calculateSize() const
    }
 
    // 5. Calculate new image height
-   const auto acc = [](const auto last, const QSize &size){ return last + size.height(); };
+   const auto acc = [](const int last, const QSize &size){ return last + size.height(); };
    const auto newHeight = (sizes_.size() - 1) * spacing_
                           + std::accumulate(sizes_.cbegin(), sizes_.cend(), 0, acc);
 
