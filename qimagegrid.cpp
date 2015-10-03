@@ -194,7 +194,7 @@ QImage QImageGrid::generateImage() const
         const auto pixelsToAdd = isLast && missingPixels ? missingPixels : 0;
         const auto x = column == 0 ? 0 : column * (size.width() + spacing_) + pixelsToAdd;
         const QImage img = it.value();
-        paint.drawImage(x, realY, img.scaled(size));
+        paint.drawImage(x, realY, img.scaled(size, Qt::SmoothTransformation));
     }
 
     paint.end();
